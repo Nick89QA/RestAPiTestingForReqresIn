@@ -1,8 +1,8 @@
 # Project Name: Java + JUnit + RestAssured + Cucumber for Reqres.in API Testing
 
-- ** This repository contains a Java project that demonstrates REST API testing using RestAssured framework for Reqres.in.
-- ** This project has best approach in BDD testing for Rest APi architecture style. 
-- ** This project will be run in Docker container and will has cucumber for bdd approach, the report will be in Allure report
+- **This repository contains a Java project that demonstrates REST API testing using RestAssured framework for Reqres.in.
+- **This project has best approach in BDD testing for Rest APi architecture style. 
+- **This project will be run in Docker container and will has cucumber for bdd approach, the report will be in Allure report
 
 ## Prerequisites
 
