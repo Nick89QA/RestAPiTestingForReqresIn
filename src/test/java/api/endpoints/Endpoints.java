@@ -10,8 +10,8 @@ public class Endpoints {
     public static final String incorrectUrl = "https://reqr.in";
     public static final String incorrectPathGetSingleUser = "/apiuses";
 
-    public static final String postUser = "/api/users";
-    public static final String putUser = "/api/users/2";
+    public static final String createUser = "/api/users";
+    public static final String updateUser = "/api/users/2";
 
 
 
