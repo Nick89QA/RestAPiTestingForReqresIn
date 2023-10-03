@@ -15,8 +15,7 @@ import java.util.List;
 
 
 import static io.restassured.RestAssured.*;
-
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class ListUsers {
 
@@ -24,12 +23,8 @@ public class ListUsers {
 
     private static final String URL = Endpoints.URL;
 
-
     private static final Logger logger = MyLogger.getLogger();
 
-    /**
-     * this test checks and asserts from response email and name
-     */
     @Test
     public void getListOfUsersAndMatchEmailAndFirstName() {
         given()
@@ -44,9 +39,6 @@ public class ListUsers {
 
     }
 
-    /**
-     * this test asserts all the emails and avatars from response
-     */
     @Test
     public void getListOfUsers() {
         List<UserPojo> users = given()
@@ -54,8 +46,7 @@ public class ListUsers {
                 .basePath(getListUsers)
                 .contentType(ContentType.JSON)
                 .when().get()
-                .then()
-                .log().all().statusCode(200)
+                .then().log().all().statusCode(200)
                 .extract().jsonPath().getList("data", UserPojo.class);
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
         logger.info("--We match all avatars with id--: PASSED");
@@ -75,19 +66,26 @@ public class ListUsers {
                 .basePath(getListUsers)
                 .contentType(ContentType.JSON)
                 .when().get()
-                .then()
-                .body("data.size", equalTo(6))
+                .then().body("data.size", equalTo(6))
+                .body("data.id", containsInAnyOrder(1, 2, 3, 4, 5, 6))
                 .log().body().statusCode(200);
-        logger.info("--We match number of elements in the array--: PASSED");
+        logger.info("--We match all id and numbers in the Array--: PASSED");
 
     }
 
-   @Test
+    @Test
     public void checkFieldAvatarInTheArray() {
         given()
-                .baseUri()
-   }
+                .baseUri(URL)
+                .basePath(getListUsers)
+                .contentType(ContentType.JSON)
+                .when().get()
+                .then().body("data.avatar", everyItem(notNullValue()))
+                .log().body().statusCode(200);
+        logger.info("--We check field avatar not null--: PASSED");
 
+
+    }
 
 
 }
