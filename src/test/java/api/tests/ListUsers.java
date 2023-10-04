@@ -1,6 +1,7 @@
 package api.tests;
 
 import api.pojo.UserPojo;
+import api.specification.Specification;
 import logger.MyLogger;
 
 import io.restassured.http.ContentType;
@@ -21,18 +22,15 @@ public class ListUsers {
 
     private static final String getListUsers = Endpoints.getListUsers;
 
-    private static final String URL = Endpoints.URL;
-
     private static final Logger logger = MyLogger.getLogger();
 
     @Test
     public void getListOfUsersAndMatchEmailAndFirstName() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
-                .baseUri(URL)
                 .basePath(getListUsers)
-                .contentType(ContentType.JSON)
                 .when().get()
-                .then().log().all().statusCode(200)
+                .then().log().all()
                 .body("data[1].email", equalTo("janet.weaver@reqres.in"))
                 .body("data[0].first_name", equalTo("George"));
         logger.info("--We match email from 'id2' and name from 'id1' in the JSonFile--: PASSED");
@@ -41,16 +39,14 @@ public class ListUsers {
 
     @Test
     public void getListOfUsers() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         List<UserPojo> users = given()
-                .baseUri(URL)
                 .basePath(getListUsers)
-                .contentType(ContentType.JSON)
                 .when().get()
-                .then().log().all().statusCode(200)
+                .then().log().all()
                 .extract().jsonPath().getList("data", UserPojo.class);
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
         logger.info("--We match all avatars with id--: PASSED");
-
 
         Assertions.assertTrue(users.stream().allMatch(x -> x.getEmail().endsWith("@reqres.in")));
         logger.info("--We match all emails which ends on @reqres.in--: PASSED");
@@ -61,27 +57,25 @@ public class ListUsers {
 
     @Test
     public void checkNumberOfElementsInTheArray() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
-                .baseUri(URL)
                 .basePath(getListUsers)
-                .contentType(ContentType.JSON)
                 .when().get()
                 .then().body("data.size", equalTo(6))
                 .body("data.id", containsInAnyOrder(1, 2, 3, 4, 5, 6))
-                .log().body().statusCode(200);
+                .log().body();
         logger.info("--We match all id and numbers in the Array--: PASSED");
 
     }
 
     @Test
     public void checkFieldAvatarInTheArray() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
-                .baseUri(URL)
                 .basePath(getListUsers)
-                .contentType(ContentType.JSON)
                 .when().get()
                 .then().body("data.avatar", everyItem(notNullValue()))
-                .log().body().statusCode(200);
+                .log().body();
         logger.info("--We check field avatar not null--: PASSED");
 
 
