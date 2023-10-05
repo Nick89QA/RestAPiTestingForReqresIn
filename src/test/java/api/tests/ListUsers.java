@@ -24,7 +24,7 @@ public class ListUsers {
 
     private static final Logger logger = MyLogger.getLogger();
 
-    @Test
+    @Test //positive
     public void getListOfUsersAndMatchEmailAndFirstName() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
@@ -37,7 +37,7 @@ public class ListUsers {
 
     }
 
-    @Test
+    @Test //positive
     public void getListOfUsers() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         List<UserPojo> users = given()
@@ -55,7 +55,7 @@ public class ListUsers {
         logger.info("--We match all avatars and format is jpg--: PASSED");
     }
 
-    @Test
+    @Test //positive
     public void checkNumberOfElementsInTheArray() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
@@ -68,7 +68,7 @@ public class ListUsers {
 
     }
 
-    @Test
+    @Test //positive
     public void checkFieldAvatarInTheArray() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
@@ -78,8 +78,6 @@ public class ListUsers {
                 .log().body();
         logger.info("--We check field avatar not null--: PASSED");
 
-
     }
-
 
 }

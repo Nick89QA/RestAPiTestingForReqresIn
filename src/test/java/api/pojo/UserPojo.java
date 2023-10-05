@@ -8,7 +8,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 @Data
-
+@Getter
+@Setter
 public class UserPojo {
     private Integer id;
     private String email;
