@@ -1,6 +1,7 @@
 package api.tests;
 
 import api.endpoints.Endpoints;
+import api.specification.Specification;
 import io.restassured.http.ContentType;
 import logger.MyLogger;
 import org.junit.jupiter.api.Test;
@@ -21,13 +22,12 @@ public class SingleUser {
 
     @Test
     public void getSingleUser() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         given()
-                .baseUri(URL)
                 .basePath(getSingleUser)
-                .contentType(ContentType.JSON)
                 .when().get()
                 .then()
-                .log().body().statusCode(200)
+                .log().body()
                 .body("data.email", equalTo("janet.weaver@reqres.in"))
                 .body("data.first_name", equalTo("Janet"))
                 .body("data.last_name", equalTo("Weaver"));
@@ -38,14 +38,13 @@ public class SingleUser {
 
     @Test
     public void checksStatusCodeWIthIncorrectUrl() {
+        Specification.installSpecification(Specification.incorrectUrlRequestSpec(), Specification.response404NotFound());
         given()
-                .baseUri(incorrectUrl)
                 .basePath(getSingleUser)
-                .contentType(ContentType.JSON)
                 .when().get()
                 .then()
-                .log().all().statusCode(404);
-        logger.info("--We checked status code with incorrect url 404 : PASSED");
+                .log().all();
+        logger.info("--Status 404, ContentType HTML : PASSED");
 
     }
 

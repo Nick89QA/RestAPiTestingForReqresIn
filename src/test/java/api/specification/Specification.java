@@ -7,12 +7,19 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static api.endpoints.Endpoints.URL;
+import static api.endpoints.Endpoints.*;
 
 public class Specification {
     public static RequestSpecification requestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(URL)
+                .setContentType(ContentType.JSON)
+                .build();
+    }
+
+    public static RequestSpecification incorrectUrlRequestSpec() {
+        return new RequestSpecBuilder()
+                .setBaseUri(incorrectUrl)
                 .setContentType(ContentType.JSON)
                 .build();
     }
@@ -35,6 +42,13 @@ public class Specification {
         return new ResponseSpecBuilder()
                 .expectStatusCode(201)
                 .expectContentType(ContentType.JSON)
+                .build();
+    }
+
+    public static ResponseSpecification response404NotFound() {
+        return new ResponseSpecBuilder()
+                .expectContentType(ContentType.HTML)
+                .expectStatusCode(404)
                 .build();
     }
 
