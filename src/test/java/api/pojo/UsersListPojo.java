@@ -8,9 +8,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 @Data
-@Getter
-@Setter
-public class UserPojo {
+
+public class UsersListPojo {
     private Integer id;
     private String email;
     @JsonProperty("first_name")
@@ -23,7 +22,7 @@ public class UserPojo {
     private Integer per_page;
     private Integer total;
     private Integer total_pages;
-    private ArrayList<UserPojo> data;
+    private ArrayList<UsersListPojo> data;
     private Support support;
 
     public class Support {

@@ -1,16 +1,11 @@
 package api.tests;
 
 import api.endpoints.Endpoints;
-import api.pojo.UserPojo;
 import api.specification.Specification;
-import io.restassured.http.ContentType;
 import logger.MyLogger;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 
-import java.util.List;
-
-import static api.endpoints.Endpoints.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.equalTo;
