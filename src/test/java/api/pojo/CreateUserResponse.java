@@ -2,6 +2,8 @@ package api.pojo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class CreateUserResponse {
  private String name;
