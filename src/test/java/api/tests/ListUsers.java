@@ -1,10 +1,8 @@
 package api.tests;
 
-import api.pojo.UserPojo;
+import api.pojo.UsersListPojo;
 import api.specification.Specification;
 import logger.MyLogger;
-
-import io.restassured.http.ContentType;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -40,11 +38,11 @@ public class ListUsers {
     @Test //positive
     public void getListOfUsers() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        List<UserPojo> users = given()
+        List<UsersListPojo> users = given()
                 .basePath(getListUsers)
                 .when().get()
                 .then().log().all()
-                .extract().jsonPath().getList("data", UserPojo.class);
+                .extract().jsonPath().getList("data", UsersListPojo.class);
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
         logger.info("--We match all avatars with id--: PASSED");
 
