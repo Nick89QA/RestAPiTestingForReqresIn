@@ -15,10 +15,11 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+import static api.endpoints.Endpoints.getListUsers;
 
 public class ListUsers {
 
-    private static final String getListUsers = Endpoints.getListUsers;
+   // private static final String getListUsers = Endpoints.getListUsers;
 
     private static final Logger logger = MyLogger.getLogger();
 

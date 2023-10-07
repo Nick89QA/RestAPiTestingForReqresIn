@@ -1,8 +1,11 @@
 package api.tests;
 
+import api.pojo.CreateUserRequest;
+import api.pojo.CreateUserResponse;
 import api.specification.Specification;
 import org.junit.jupiter.api.Test;
 
+import static api.endpoints.Endpoints.URL;
 import static io.restassured.RestAssured.given;
 
 public class CreateUser {
@@ -11,10 +14,12 @@ public class CreateUser {
 
     @Test
     public void createUser() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        CreateUserRequest rq = new CreateUserRequest();
+        rq.setName("Nick");
+        rq.setJob("Software Engineer in Test");
 
-        given()
-
+        CreateUserResponse rs = given()
+                .baseUri(URL)
 
     }
 }
