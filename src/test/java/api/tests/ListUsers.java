@@ -7,7 +7,6 @@ import logger.MyLogger;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import api.endpoints.Endpoints;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -19,7 +18,6 @@ import static api.endpoints.Endpoints.getListUsers;
 
 public class ListUsers {
 
-   // private static final String getListUsers = Endpoints.getListUsers;
 
     private static final Logger logger = MyLogger.getLogger();
 

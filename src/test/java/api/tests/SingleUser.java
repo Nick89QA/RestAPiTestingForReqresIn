@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.equalTo;
+import static api.endpoints.Endpoints.getSingleUser;
+import static api.endpoints.Endpoints.incorrectPathGetSingleUser;
+
+
 
 public class SingleUser {
 
 
-    private static final String getSingleUser = Endpoints.getSingleUser;
-    private static final String incorrectPathGetSingleUser = Endpoints.incorrectPathGetSingleUser;
     private static final Logger logger = MyLogger.getLogger();
 
     @Test  //positive
