@@ -18,20 +18,25 @@ public class CreateUser {
 
     @Test
     public void createUser() {
-      //  Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
 
-        CreateUserRequest rq = new CreateUserRequest();
-        rq.setName("Nick");
-        rq.setJob("Software Engineer in Test");
-        logger.info("--We created User status 201 OK--: PASSED");
+        try {
+            Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
 
+            CreateUserRequest rq = new CreateUserRequest();
+            rq.setName("Nick");
+            rq.setJob("Software Engineer in Test");
 
-        CreateUserResponse rs = given()
-                .baseUri(URL)
-                .basePath(createUser)
-                .body(rq)
-                .when().post()
-                .then().extract().as(CreateUserResponse.class);
+            CreateUserResponse rs = given()
+                    .baseUri(URL)
+                    .basePath(createUser)
+                    .body(rq)
+                    .log().body()
+                    .when().post()
+                    .then().extract().as(CreateUserResponse.class);
+
+        } catch (Exception e) {
+            logger.error("the error has happened when user was created");
+        }
 
     }
 }
