@@ -25,7 +25,7 @@ public class CreateUser {
 
             CreateUserRequest rq = new CreateUserRequest();
             rq.setName("Nick");
-            rq.setJob("Leader");
+            rq.setJob("Software Engineer in Test");
 
             CreateUserResponse rs = given()
                     .baseUri(URL)
