@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import utils.DateDeserializer;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Data
@@ -12,9 +13,9 @@ public class CreateUserResponse {
  private String name;
  private String job;
  private int id;
- @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+ @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
  @JsonDeserialize(using = DateDeserializer.class)
- private OffsetDateTime createdAt;
+ private LocalDateTime createdAt;
 
 
 }
