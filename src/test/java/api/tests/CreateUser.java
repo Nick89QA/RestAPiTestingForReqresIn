@@ -8,8 +8,7 @@ import logger.MyLogger;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 
-import static api.endpoints.Endpoints.URL;
-import static api.endpoints.Endpoints.createUser;
+import static api.endpoints.Endpoints.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -28,9 +27,7 @@ public class CreateUser {
             rq.setJob("Software Engineer in Test");
 
             CreateUserResponse rs = given()
-                    .baseUri(URL)
                     .basePath(createUser)
-                    .contentType(ContentType.JSON)
                     .body(rq)
                     .log().body()
                     .when().post()
@@ -45,6 +42,40 @@ public class CreateUser {
             logger.error("the error has happened when user was created");
         }
         logger.info("The user has been created");
+    }
+
+    @Test
+    public void createUserWithIncorrectPath() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
+
+        CreateUserRequest rq = new CreateUserRequest();
+        rq.setName(" Nick ");
+        rq.setJob(" Software Engineer in Test ");
+
+                 given()
+                .basePath(createUserIncorrectPath)
+                .body(rq)
+                .log().body()
+                .when().post()
+                .then().log().all();
+
+    }
+
+    @Test
+    public void createUserWithIncorrectUrl() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+
+        CreateUserRequest rq = new CreateUserRequest();
+        rq.setName(" Nick ");
+        rq.setJob(" Software Engineer in Test ");
+
+        given()
+                .basePath(createUser)
+                .body(rq)
+                .log().all()
+                .when().post()
+                .then().log().all();
+
     }
 }
 

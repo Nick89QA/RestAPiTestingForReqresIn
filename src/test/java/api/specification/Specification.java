@@ -10,12 +10,26 @@ import io.restassured.specification.ResponseSpecification;
 import static api.endpoints.Endpoints.*;
 
 public class Specification {
+
+    /**
+     *Request Specification
+     */
+
     public static RequestSpecification requestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(URL)
                 .setContentType(ContentType.JSON)
                 .build();
     }
+
+    public static RequestSpecification requestSpecIncorrectUrl() {
+        return new RequestSpecBuilder()
+                .setBaseUri(incorrectUrl)
+                .setContentType(ContentType.JSON)
+                .build();
+    }
+
+
 
     public static RequestSpecification incorrectUrlRequestSpec() {
         return new RequestSpecBuilder()
@@ -24,7 +38,9 @@ public class Specification {
                 .build();
     }
 
-
+    /**
+     *Response Specification
+     */
     public static ResponseSpecification responseSpecOK200() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
