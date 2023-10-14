@@ -5,7 +5,7 @@ import api.pojo.CreateUserRequest;
 public class UserGenerator {
 
 
-    public static CreateUserRequest getSimpleUser() {
+    public static CreateUserRequest createSimpleUser() {
         return CreateUserRequest.builder()
                 .name(" Nick ")
                 .job(" Software Engineer in Test ")
@@ -13,4 +13,11 @@ public class UserGenerator {
 
     }
 
+    public static CreateUserRequest createUserWithDiffParams() {
+        return CreateUserRequest.builder()
+                .name("/@?!")
+                .job(null)
+                .build();
+
+    }
 }

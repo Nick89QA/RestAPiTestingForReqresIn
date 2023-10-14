@@ -2,6 +2,7 @@ package api.tests;
 
 import api.pojo.UsersListPojo;
 import api.specification.Specification;
+import api.steps.NewUser;
 import api.steps.ListOfUsers;
 import logger.MyLogger;
 
@@ -12,7 +13,7 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-public class TestUsers {
+public class AllTheUsersTest {
 
 
     private static final Logger logger = MyLogger.getLogger();
@@ -52,5 +53,31 @@ public class TestUsers {
         ListOfUsers.checkTheFieldAvatar();
 
     }
+
+    @Test
+    public void createANewUser() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        NewUser.createUser();
+    }
+
+    @Test
+    public void createUserWithIncorrectPath() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
+        NewUser.createUserWrongPath();
+
+    }
+
+    @Test
+    public void createUserWithInCorrectUrl() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+       NewUser.createUserWithWrongUrl();
+    }
+
+    @Test
+    public void createUserWithSpecCharacters() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+        NewUser.createUserWithIncorrectParams();
+    }
+
 
 }
