@@ -15,14 +15,14 @@ public class Specification {
      *Request Specification
      */
 
-    public static RequestSpecification requestSpec() {
+    public static final RequestSpecification requestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(URL)
                 .setContentType(ContentType.JSON)
                 .build();
     }
 
-    public static RequestSpecification requestSpecIncorrectUrl() {
+    public static final RequestSpecification requestSpecIncorrectUrl() {
         return new RequestSpecBuilder()
                 .setBaseUri(incorrectUrl)
                 .setContentType(ContentType.JSON)
@@ -31,7 +31,7 @@ public class Specification {
 
 
 
-    public static RequestSpecification incorrectUrlRequestSpec() {
+    public static final RequestSpecification incorrectUrlRequestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(incorrectUrl)
                 .setContentType(ContentType.JSON)
@@ -48,21 +48,21 @@ public class Specification {
                 .build();
     }
 
-    public static ResponseSpecification responseSpecBadRequest400() {
+    public static final ResponseSpecification responseSpecBadRequest400() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
                 .expectContentType(ContentType.JSON)
                 .build();
     }
 
-    public static ResponseSpecification response201Created() {
+    public static  final ResponseSpecification response201Created() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(201)
                 .expectContentType(ContentType.JSON)
                 .build();
     }
 
-    public static ResponseSpecification response404NotFound() {
+    public static final ResponseSpecification response404NotFound() {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.HTML)
                 .expectStatusCode(404)

@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import logger.MyLogger;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
+import utils.UserGenerator;
 
 import static api.endpoints.Endpoints.*;
 import static io.restassured.RestAssured.given;
@@ -21,10 +22,7 @@ public class CreateUser {
     public void createUser() {
         try {
             Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-
-            CreateUserRequest rq = new CreateUserRequest();
-            rq.setName("Nick");
-            rq.setJob("Software Engineer in Test");
+            CreateUserRequest rq = UserGenerator.getSimpleUser();
 
             CreateUserResponse rs = given()
                     .basePath(createUser)
@@ -47,11 +45,7 @@ public class CreateUser {
     @Test
     public void createUserWithIncorrectPath() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
-
-        CreateUserRequest rq = new CreateUserRequest();
-        rq.setName(" Nick ");
-        rq.setJob(" Software Engineer in Test ");
-
+        CreateUserRequest rq = UserGenerator.getSimpleUser();
                  given()
                 .basePath(createUserIncorrectPath)
                 .body(rq)
@@ -64,10 +58,7 @@ public class CreateUser {
     @Test
     public void createUserWithIncorrectUrl() {
         Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
-
-        CreateUserRequest rq = new CreateUserRequest();
-        rq.setName(" Nick ");
-        rq.setJob(" Software Engineer in Test ");
+        CreateUserRequest rq = UserGenerator.getSimpleUser();
 
         given()
                 .basePath(createUser)
