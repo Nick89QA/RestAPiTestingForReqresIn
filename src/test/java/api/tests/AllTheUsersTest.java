@@ -74,10 +74,11 @@ public class AllTheUsersTest {
     }
 
     @Test
-    public void createUserWithSpecCharacters() {
-        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response201Created());
-        NewUser.createUserWithMinimumCharBody();
-    }
+    public void createUserWithLargeBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        NewUser.createUserWithMaximumCharBody();
 
+
+    }
 
 }

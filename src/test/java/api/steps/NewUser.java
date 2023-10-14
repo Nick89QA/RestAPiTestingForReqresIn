@@ -63,10 +63,9 @@ public class NewUser {
 
     public static void createUserWithMinimumCharBody() {
         try {
-            CreateUserRequest rq = UserGenerator.createUserWithDiffParams();
+            CreateUserRequest rq = UserGenerator.createUserWithMinCharacters();
 
             CreateUserResponse rs = given()
-                    .baseUri(URL)
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
@@ -80,6 +79,29 @@ public class NewUser {
 
 
             logger.info("The user has been created");
+        } catch (Exception e) {
+            logger.error(" the error has happened when user was created " + e.getMessage());
+        }
+
+    }
+
+    public static void createUserWithMaximumCharBody() {
+        try {
+            CreateUserRequest rq = UserGenerator.createUserWithMaxCharacters();
+
+            CreateUserResponse rs = given()
+                    .basePath(createUser)
+                    .body(rq)
+                    .log().all()
+                    .when().post()
+                    .then().log().body().extract().as(CreateUserResponse.class);
+
+            assertThat(rs)
+                    .isNotNull()
+                    .extracting(CreateUserResponse::getName)
+                    .isEqualTo(rq.getName());
+
+            logger.info("The user with max char body has been created");
         } catch (Exception e) {
             logger.error(" the error has happened when user was created " + e.getMessage());
         }

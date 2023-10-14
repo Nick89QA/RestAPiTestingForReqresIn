@@ -41,7 +41,7 @@ public class Specification {
     /**
      *Response Specification
      */
-    public static ResponseSpecification responseSpecOK200() {
+    public static final ResponseSpecification responseSpecOK200() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectContentType(ContentType.JSON)
