@@ -15,8 +15,8 @@ public class UserGenerator {
 
     public static CreateUserRequest createUserWithDiffParams() {
         return CreateUserRequest.builder()
-                .name("/@?!")
-                .job(null)
+                .name("n")
+                .job("P")
                 .build();
 
     }
