@@ -13,11 +13,28 @@ public class UserGenerator {
 
     }
 
-    public static CreateUserRequest createUserWithDiffParams() {
+    public static CreateUserRequest createUserWithMinCharacters() {
         return CreateUserRequest.builder()
-                .name("/@?!")
-                .job(null)
+                .name("n")
+                .job("P")
                 .build();
 
     }
+
+    public static CreateUserRequest createUserWithMaxCharacters() {
+        return CreateUserRequest.builder()
+                .name("nsfsfsfsfsfsdfkkddkkdkdkddkdkdkdkdkdkdkdkdkdkkdkdkdkdkdkddkdkdkdkkdkdkdkdkdkdsdfsfSSSSdfFSFSFSFSFFS")
+                .job("PDADASDDADADADASDASDKKNNNBM<N<N<N<<NDADADADADADDDDASDADASDADADADADASDADADAASDDAdfsdfsfsfsfsfsfsfsFDFFSSFSF")
+                .build();
+
+    }
+
+    public static CreateUserRequest createUserWithEmptyBrackets() {
+        return CreateUserRequest.builder()
+                .name("")
+                .job("")
+                .build();
+
+    }
+
 }
