@@ -4,6 +4,7 @@ import api.pojo.UsersListPojo;
 import api.specification.Specification;
 import api.steps.NewUser;
 import api.steps.ListOfUsers;
+import api.steps.SingleUser;
 import logger.MyLogger;
 
 
@@ -17,6 +18,10 @@ public class AllTheUsersTest {
 
 
     private static final Logger logger = MyLogger.getLogger();
+
+    /**
+     * ---List of users---
+     */
 
     @Test //positive
     public void getListOfUsersAndMatchEmailAndFirstName() {
@@ -54,6 +59,9 @@ public class AllTheUsersTest {
 
     }
 
+    /**
+     * ---New User---
+     */
     @Test
     public void createANewUser() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
@@ -70,7 +78,7 @@ public class AllTheUsersTest {
     @Test
     public void createUserWithInCorrectUrl() {
         Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
-       NewUser.createUserWithWrongUrl();
+        NewUser.createUserWithWrongUrl();
     }
 
     @Test
@@ -78,7 +86,43 @@ public class AllTheUsersTest {
         Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
         NewUser.createUserWithMaximumCharBody();
 
+    }
+
+    @Test
+    public void createUserWithMinCharBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        NewUser.createUserWithMinimumCharBody();
 
     }
 
+    @Test
+    public void createUserWithEmptyBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        NewUser.createUserWithEmptyBody();
+
+    }
+
+    /**
+     * ---Single user---
+     */
+
+    @Test
+    public void getUserAndMatchDataInResponse() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        SingleUser.getSingleUser();
+
+    }
+
+    @Test
+    public void getUserWithIncorrectUrl() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+        SingleUser.checksStatusCodeWIthIncorrectUrl();
+
+    }
+    @Test
+    public void getUserWithIncorrectPath() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+        SingleUser.checksStatusCodeWIthIncorrectPath();
+
+    }
 }

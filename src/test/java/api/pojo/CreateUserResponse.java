@@ -6,7 +6,7 @@ import lombok.Data;
 import utils.DateDeserializer;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+
 
 @Data
 public class CreateUserResponse {

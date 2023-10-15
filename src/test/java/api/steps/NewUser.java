@@ -28,8 +28,8 @@ public class NewUser {
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getName)
-                    .isEqualTo(rq.getName());
+                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .containsExactly(rq.getName(), rq.getJob());
             logger.info("The user has been created");
 
         } catch (Exception e) {
@@ -74,11 +74,11 @@ public class NewUser {
 
             assertThat(rs)
                     .isNotNull()
-                  .extracting(CreateUserResponse::getName)
-                    .isEqualTo(rq.getName());
+                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .containsExactly(rq.getName(), rq.getJob());
 
 
-            logger.info("The user has been created");
+            logger.info("The user with min characters has been created");
         } catch (Exception e) {
             logger.error(" the error has happened when user was created " + e.getMessage());
         }
@@ -98,10 +98,34 @@ public class NewUser {
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getName)
-                    .isEqualTo(rq.getName());
+                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .containsExactly(rq.getName(), rq.getJob());
 
-            logger.info("The user with max char body has been created");
+            logger.info("The user with max characters body has been created");
+        } catch (Exception e) {
+            logger.error(" the error has happened when user was created " + e.getMessage());
+        }
+
+    }
+
+    public static void createUserWithEmptyBody() {
+        try {
+            CreateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
+
+            CreateUserResponse rs = given()
+                    .basePath(createUser)
+                    .body(rq)
+                    .log().all()
+                    .when().post()
+                    .then().log().body().extract().as(CreateUserResponse.class);
+
+            assertThat(rs)
+                    .isNotNull()
+                    .extracting(CreateUserResponse::getJob, CreateUserResponse::getName)
+                    .containsExactly(rq.getJob(), rq.getName());
+
+
+            logger.info("The user with empty body has been created");
         } catch (Exception e) {
             logger.error(" the error has happened when user was created " + e.getMessage());
         }
