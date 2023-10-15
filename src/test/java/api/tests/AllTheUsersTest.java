@@ -1,9 +1,8 @@
 package api.tests;
 
-import api.pojo.UsersListPojo;
+import api.pojo.ListOfUsers;
 import api.specification.Specification;
 import api.steps.NewUser;
-import api.steps.ListOfUsers;
 import api.steps.SingleUser;
 import logger.MyLogger;
 
@@ -26,14 +25,14 @@ public class AllTheUsersTest {
     @Test //positive
     public void getListOfUsersAndMatchEmailAndFirstName() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        ListOfUsers.getUsers();
+        api.steps.ListOfUsers.getUsers();
 
     }
 
     @Test //positive
     public void getListOfUsers() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        List<UsersListPojo> users = ListOfUsers.getAllUsers();
+        List<ListOfUsers> users = api.steps.ListOfUsers.getAllUsers();
 
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
         logger.info("--We match all avatars with id--: PASSED");
@@ -48,14 +47,14 @@ public class AllTheUsersTest {
     @Test //positive
     public void matchNumberOfArray() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        ListOfUsers.checkAllNumberInArray();
+        api.steps.ListOfUsers.checkAllNumberInArray();
 
     }
 
     @Test //positive
     public void checkFieldAvatarInTheArray() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        ListOfUsers.checkTheFieldAvatar();
+        api.steps.ListOfUsers.checkTheFieldAvatar();
 
     }
 
