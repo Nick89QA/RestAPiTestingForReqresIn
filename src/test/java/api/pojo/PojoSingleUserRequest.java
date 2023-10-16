@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class CreateUserRequest {
+public class PojoSingleUserRequest {
     private String name;
     private String job;
 

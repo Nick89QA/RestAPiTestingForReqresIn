@@ -1,7 +1,8 @@
 package api.tests;
 
-import api.pojo.ListOfUsers;
+import api.pojo.PojoListOfUsers;
 import api.specification.Specification;
+import api.steps.ListResource;
 import api.steps.NewUser;
 import api.steps.SingleUser;
 import logger.MyLogger;
@@ -32,7 +33,7 @@ public class AllTheUsersTest {
     @Test //positive
     public void getListOfUsers() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        List<ListOfUsers> users = api.steps.ListOfUsers.getAllUsers();
+        List<PojoListOfUsers> users = api.steps.ListOfUsers.getAllUsers();
 
         users.forEach(x -> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
         logger.info("--We match all avatars with id--: PASSED");
@@ -118,10 +119,21 @@ public class AllTheUsersTest {
         SingleUser.checksStatusCodeWIthIncorrectUrl();
 
     }
+
     @Test
     public void getUserWithIncorrectPath() {
         Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
         SingleUser.checksStatusCodeWIthIncorrectPath();
 
     }
+
+    @Test
+    public void getListResource() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.getListResource();
+
+
+    }
+
+
 }
