@@ -1,7 +1,7 @@
 package api.steps;
 
-import api.pojo.CreateUserRequest;
-import api.pojo.CreateUserResponse;
+import api.pojo.PojoSingleUserRequest;
+import api.pojo.PojoSingleUserResponse;
 import logger.MyLogger;
 import org.slf4j.Logger;
 import utils.UserGenerator;
@@ -17,18 +17,18 @@ public class NewUser {
 
     public static void createUser() {
         try {
-            CreateUserRequest rq = UserGenerator.createSimpleUser();
+            PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
 
-            CreateUserResponse rs = given()
+            PojoSingleUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().body()
                     .when().post()
-                    .then().extract().as(CreateUserResponse.class);
+                    .then().extract().as(PojoSingleUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
             logger.info("The user has been created");
 
@@ -39,7 +39,7 @@ public class NewUser {
     }
 
     public static void createUserWrongPath() {
-        CreateUserRequest rq = UserGenerator.createSimpleUser();
+        PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
         given()
                 .basePath(createUserIncorrectPath)
                 .body(rq)
@@ -50,7 +50,7 @@ public class NewUser {
     }
 
     public static void createUserWithWrongUrl() {
-        CreateUserRequest rq = UserGenerator.createSimpleUser();
+        PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
 
         given()
                 .basePath(createUser)
@@ -63,18 +63,18 @@ public class NewUser {
 
     public static void createUserWithMinimumCharBody() {
         try {
-            CreateUserRequest rq = UserGenerator.createUserWithMinCharacters();
+            PojoSingleUserRequest rq = UserGenerator.createUserWithMinCharacters();
 
-            CreateUserResponse rs = given()
+            PojoSingleUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(CreateUserResponse.class);
+                    .then().log().body().extract().as(PojoSingleUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
 
@@ -87,18 +87,18 @@ public class NewUser {
 
     public static void createUserWithMaximumCharBody() {
         try {
-            CreateUserRequest rq = UserGenerator.createUserWithMaxCharacters();
+            PojoSingleUserRequest rq = UserGenerator.createUserWithMaxCharacters();
 
-            CreateUserResponse rs = given()
+            PojoSingleUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(CreateUserResponse.class);
+                    .then().log().body().extract().as(PojoSingleUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getName, CreateUserResponse::getJob)
+                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
             logger.info("The user with max characters body has been created");
@@ -110,18 +110,18 @@ public class NewUser {
 
     public static void createUserWithEmptyBody() {
         try {
-            CreateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
+            PojoSingleUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
 
-            CreateUserResponse rs = given()
+            PojoSingleUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(CreateUserResponse.class);
+                    .then().log().body().extract().as(PojoSingleUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(CreateUserResponse::getJob, CreateUserResponse::getName)
+                    .extracting(PojoSingleUserResponse::getJob, PojoSingleUserResponse::getName)
                     .containsExactly(rq.getJob(), rq.getName());
 
 

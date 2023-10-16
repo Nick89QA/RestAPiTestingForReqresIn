@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Data
 
-public class ListOfUsers {
+public class PojoListOfUsers {
     private Integer id;
     private String email;
     @JsonProperty("first_name")
@@ -20,7 +20,7 @@ public class ListOfUsers {
     private Integer per_page;
     private Integer total;
     private Integer total_pages;
-    private ArrayList<ListOfUsers> data;
+    private ArrayList<PojoListOfUsers> data;
     private Support support;
 
     public class Support {

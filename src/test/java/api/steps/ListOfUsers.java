@@ -1,5 +1,6 @@
 package api.steps;
 
+import api.pojo.PojoListOfUsers;
 import logger.MyLogger;
 import org.slf4j.Logger;
 
@@ -25,12 +26,12 @@ public class ListOfUsers {
     }
 
 
-    public static List<api.pojo.ListOfUsers> getAllUsers() {
+    public static List<PojoListOfUsers> getAllUsers() {
         return given()
                 .basePath(getListUsers)
                 .when().get()
                 .then().log().all()
-                .extract().jsonPath().getList("data", api.pojo.ListOfUsers.class);
+                .extract().jsonPath().getList("data", PojoListOfUsers.class);
 
     }
 
