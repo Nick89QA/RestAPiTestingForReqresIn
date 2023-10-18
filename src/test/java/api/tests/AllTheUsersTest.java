@@ -128,9 +128,15 @@ public class AllTheUsersTest {
     }
 
     @Test
-    public void getListResource() {
+    public void getListResourceAndSorted() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        ListResource.getListResource();
+        ListResource.listResourceSortByYears();
+
+    }
+    @Test
+    public void checkFieldsNotNull() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.checkThatFieldsInResponseNotNull();
 
 
     }
