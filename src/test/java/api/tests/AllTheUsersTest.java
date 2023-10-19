@@ -136,9 +136,25 @@ public class AllTheUsersTest {
     @Test
     public void checkFieldsNotNull() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        ListResource.checkThatFieldsInResponseNotNull();
+        ListResource.checkFieldsInResponseNotNull();
 
 
+    }
+    @Test
+    public void checkFieldsId() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.checkThatIdIsUnique();
+    }
+
+    @Test
+    public void checkFieldPantoneValue() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.checkFieldPantoneValue();
+    }
+    @Test
+    public void checkFieldColor() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.checkFieldColor();
     }
 
 
