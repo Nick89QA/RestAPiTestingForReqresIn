@@ -151,6 +151,11 @@ public class AllTheUsersTest {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         ListResource.checkFieldPantoneValue();
     }
+    @Test
+    public void checkFieldColor() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        ListResource.checkFieldColor();
+    }
 
 
 }

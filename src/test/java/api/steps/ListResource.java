@@ -105,6 +105,28 @@ public class ListResource {
 
     }
 
+    public static void checkFieldColor() {
+        try {
+            List<PojoListResource> listR = given()
+                    .basePath(getListResource)
+                    .log().body()
+                    .when().get()
+                    .then().log().all()
+                    .extract().body().jsonPath().getList("data", PojoListResource.class);
+
+            for (PojoListResource resource : listR) {
+
+                assertThat(resource.getColor()).matches("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+            }
+            logger.info("We checked all the field color has format--Passed");
+
+        } catch (Exception e) {
+            logger.info("the error has happened while checking format of field color" + e.getMessage());
+
+        }
+
+    }
+
 }
 
 
