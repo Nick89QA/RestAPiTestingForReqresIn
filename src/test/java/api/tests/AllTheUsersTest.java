@@ -12,13 +12,12 @@ import logger.MyLogger;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 
 import java.util.List;
 
-import static org.junit.runners.MethodSorters.NAME_ASCENDING;
-@FixMethodOrder(NAME_ASCENDING)
+
+
 
 public class AllTheUsersTest {
 
@@ -70,12 +69,12 @@ public class AllTheUsersTest {
      * ---New User---
      */
     @Test
-    public void test1CreateANewUser() {
+    public void CreateANewUser() {
         CreateNewUser.createUser();
     }
 
     @Test
-    public void test2UpdateUser() {
+    public void UpdateExistUser() {
         UpdateUser.updateExistingUser();
 
     }

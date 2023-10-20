@@ -1,7 +1,7 @@
 package api.steps;
 
 import api.pojo.PojoCreateUpdateUserRequest;
-import api.pojo.PojoCreateUpdateUserResponse;
+import api.pojo.PojoCreateUserResponse;
 import api.specification.Specification;
 import logger.MyLogger;
 import org.slf4j.Logger;
@@ -9,7 +9,6 @@ import utils.UserGenerator;
 
 import static api.endpoints.Endpoints.*;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.requestSpecification;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CreateNewUser {
@@ -21,7 +20,7 @@ public class CreateNewUser {
         try {
             PojoCreateUpdateUserRequest rq = UserGenerator.createSimpleUser();
 
-            PojoCreateUpdateUserResponse rs = given()
+            PojoCreateUserResponse rs = given()
                     .spec(Specification.requestSpec())
                     .basePath(createUser)
                     .body(rq)
@@ -29,11 +28,11 @@ public class CreateNewUser {
                     .when().post()
                     .then()
                     .spec(Specification.response201Created())
-                    .extract().as(PojoCreateUpdateUserResponse.class);
+                    .extract().as(PojoCreateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
+                    .extracting(PojoCreateUserResponse::getName, PojoCreateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
             logger.info("The user has been created");
 
@@ -70,16 +69,16 @@ public class CreateNewUser {
         try {
             PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMinCharacters();
 
-            PojoCreateUpdateUserResponse rs = given()
+            PojoCreateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
+                    .extracting(PojoCreateUserResponse::getName, PojoCreateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
 
@@ -94,16 +93,16 @@ public class CreateNewUser {
         try {
             PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMaxCharacters();
 
-            PojoCreateUpdateUserResponse rs = given()
+            PojoCreateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
+                    .extracting(PojoCreateUserResponse::getName, PojoCreateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
             logger.info("The user with max characters body has been created");
@@ -117,16 +116,16 @@ public class CreateNewUser {
         try {
             PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
 
-            PojoCreateUpdateUserResponse rs = given()
+            PojoCreateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoCreateUpdateUserResponse::getJob, PojoCreateUpdateUserResponse::getName)
+                    .extracting(PojoCreateUserResponse::getJob, PojoCreateUserResponse::getName)
                     .containsExactly(rq.getJob(), rq.getName());
 
 
