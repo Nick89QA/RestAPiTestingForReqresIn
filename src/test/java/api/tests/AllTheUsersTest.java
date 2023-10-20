@@ -3,18 +3,24 @@ package api.tests;
 import api.pojo.PojoListOfUsers;
 import api.specification.Specification;
 import api.steps.ListResource;
-import api.steps.NewUser;
+import api.steps.CreateNewUser;
 import api.steps.SingleUser;
+import api.steps.UpdateUser;
 import logger.MyLogger;
 
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 
 import java.util.List;
 
+
+
+
 public class AllTheUsersTest {
+
 
 
     private static final Logger logger = MyLogger.getLogger();
@@ -63,42 +69,47 @@ public class AllTheUsersTest {
      * ---New User---
      */
     @Test
-    public void createANewUser() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        NewUser.createUser();
+    public void CreateANewUser() {
+        CreateNewUser.createUser();
+    }
+
+    @Test
+    public void UpdateExistUser() {
+        UpdateUser.updateExistingUser();
+
     }
 
     @Test
     public void createUserWithIncorrectPath() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
-        NewUser.createUserWrongPath();
+        CreateNewUser.createUserWrongPath();
 
     }
 
     @Test
     public void createUserWithInCorrectUrl() {
         Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
-        NewUser.createUserWithWrongUrl();
+        CreateNewUser.createUserWithWrongUrl();
     }
 
     @Test
     public void createUserWithLargeBody() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        NewUser.createUserWithMaximumCharBody();
+        CreateNewUser.createUserWithMaximumCharBody();
 
     }
 
     @Test
     public void createUserWithMinCharBody() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        NewUser.createUserWithMinimumCharBody();
+        CreateNewUser.createUserWithMinimumCharBody();
 
     }
 
     @Test
     public void createUserWithEmptyBody() {
         Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        NewUser.createUserWithEmptyBody();
+        CreateNewUser.createUserWithEmptyBody();
 
     }
 
