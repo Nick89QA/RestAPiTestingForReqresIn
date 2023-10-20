@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 
 @Data
-public class PojoSingleUserResponse {
+public class PojoCreateUpdateUserResponse {
  private String name;
  private String job;
  private int id;

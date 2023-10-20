@@ -1,34 +1,39 @@
 package api.steps;
 
-import api.pojo.PojoSingleUserRequest;
-import api.pojo.PojoSingleUserResponse;
+import api.pojo.PojoCreateUpdateUserRequest;
+import api.pojo.PojoCreateUpdateUserResponse;
+import api.specification.Specification;
 import logger.MyLogger;
 import org.slf4j.Logger;
 import utils.UserGenerator;
 
 import static api.endpoints.Endpoints.*;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.requestSpecification;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class NewUser {
+public class CreateNewUser {
 
     private static final Logger logger = MyLogger.getLogger();
 
 
     public static void createUser() {
         try {
-            PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
+            PojoCreateUpdateUserRequest rq = UserGenerator.createSimpleUser();
 
-            PojoSingleUserResponse rs = given()
+            PojoCreateUpdateUserResponse rs = given()
+                    .spec(Specification.requestSpec())
                     .basePath(createUser)
                     .body(rq)
                     .log().body()
                     .when().post()
-                    .then().extract().as(PojoSingleUserResponse.class);
+                    .then()
+                    .spec(Specification.response201Created())
+                    .extract().as(PojoCreateUpdateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
+                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
             logger.info("The user has been created");
 
@@ -39,7 +44,7 @@ public class NewUser {
     }
 
     public static void createUserWrongPath() {
-        PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
+        PojoCreateUpdateUserRequest rq = UserGenerator.createSimpleUser();
         given()
                 .basePath(createUserIncorrectPath)
                 .body(rq)
@@ -50,7 +55,7 @@ public class NewUser {
     }
 
     public static void createUserWithWrongUrl() {
-        PojoSingleUserRequest rq = UserGenerator.createSimpleUser();
+        PojoCreateUpdateUserRequest rq = UserGenerator.createSimpleUser();
 
         given()
                 .basePath(createUser)
@@ -63,18 +68,18 @@ public class NewUser {
 
     public static void createUserWithMinimumCharBody() {
         try {
-            PojoSingleUserRequest rq = UserGenerator.createUserWithMinCharacters();
+            PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMinCharacters();
 
-            PojoSingleUserResponse rs = given()
+            PojoCreateUpdateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoSingleUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
+                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
 
@@ -87,18 +92,18 @@ public class NewUser {
 
     public static void createUserWithMaximumCharBody() {
         try {
-            PojoSingleUserRequest rq = UserGenerator.createUserWithMaxCharacters();
+            PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMaxCharacters();
 
-            PojoSingleUserResponse rs = given()
+            PojoCreateUpdateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoSingleUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoSingleUserResponse::getName, PojoSingleUserResponse::getJob)
+                    .extracting(PojoCreateUpdateUserResponse::getName, PojoCreateUpdateUserResponse::getJob)
                     .containsExactly(rq.getName(), rq.getJob());
 
             logger.info("The user with max characters body has been created");
@@ -110,18 +115,18 @@ public class NewUser {
 
     public static void createUserWithEmptyBody() {
         try {
-            PojoSingleUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
+            PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
 
-            PojoSingleUserResponse rs = given()
+            PojoCreateUpdateUserResponse rs = given()
                     .basePath(createUser)
                     .body(rq)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoSingleUserResponse.class);
+                    .then().log().body().extract().as(PojoCreateUpdateUserResponse.class);
 
             assertThat(rs)
                     .isNotNull()
-                    .extracting(PojoSingleUserResponse::getJob, PojoSingleUserResponse::getName)
+                    .extracting(PojoCreateUpdateUserResponse::getJob, PojoCreateUpdateUserResponse::getName)
                     .containsExactly(rq.getJob(), rq.getName());
 
 
