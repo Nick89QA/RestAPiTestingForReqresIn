@@ -9,7 +9,6 @@ import api.steps.UpdateUser;
 import logger.MyLogger;
 
 
-import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -17,13 +16,61 @@ import org.slf4j.Logger;
 import java.util.List;
 
 
-
-
 public class AllTheUsersTest {
 
 
-
     private static final Logger logger = MyLogger.getLogger();
+
+
+
+    /**
+     * ---New User---
+     */
+    @Test
+    public void CreateANewUser() {
+        CreateNewUser.createUser();
+    }
+
+    @Test
+    public void UpdateExistUser() {
+        UpdateUser.updateExistingUser();
+
+    }
+
+
+    @Test
+    public void createUserWithIncorrectPath() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
+        CreateNewUser.createUserWrongPath();
+
+    }
+
+    @Test
+    public void createUserWithInCorrectUrl() {
+        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
+        CreateNewUser.createUserWithWrongUrl();
+    }
+
+    @Test
+    public void createUserWithLargeBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        CreateNewUser.createUserWithMaximumCharBody();
+
+    }
+
+    @Test
+    public void createUserWithMinCharBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        CreateNewUser.createUserWithMinimumCharBody();
+
+    }
+
+    @Test
+    public void createUserWithEmptyBody() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        CreateNewUser.createUserWithEmptyBody();
+
+    }
 
     /**
      * ---List of users---
@@ -65,53 +112,8 @@ public class AllTheUsersTest {
 
     }
 
-    /**
-     * ---New User---
-     */
-    @Test
-    public void CreateANewUser() {
-        CreateNewUser.createUser();
-    }
 
-    @Test
-    public void UpdateExistUser() {
-        UpdateUser.updateExistingUser();
 
-    }
-
-    @Test
-    public void createUserWithIncorrectPath() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response404NotFound());
-        CreateNewUser.createUserWrongPath();
-
-    }
-
-    @Test
-    public void createUserWithInCorrectUrl() {
-        Specification.installSpecification(Specification.requestSpecIncorrectUrl(), Specification.response404NotFound());
-        CreateNewUser.createUserWithWrongUrl();
-    }
-
-    @Test
-    public void createUserWithLargeBody() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        CreateNewUser.createUserWithMaximumCharBody();
-
-    }
-
-    @Test
-    public void createUserWithMinCharBody() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        CreateNewUser.createUserWithMinimumCharBody();
-
-    }
-
-    @Test
-    public void createUserWithEmptyBody() {
-        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
-        CreateNewUser.createUserWithEmptyBody();
-
-    }
 
     /**
      * ---Single user---
@@ -144,6 +146,7 @@ public class AllTheUsersTest {
         ListResource.listResourceSortByYears();
 
     }
+
     @Test
     public void checkFieldsNotNull() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
@@ -151,6 +154,7 @@ public class AllTheUsersTest {
 
 
     }
+
     @Test
     public void checkFieldsId() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
@@ -162,6 +166,7 @@ public class AllTheUsersTest {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         ListResource.checkFieldPantoneValue();
     }
+
     @Test
     public void checkFieldColor() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
