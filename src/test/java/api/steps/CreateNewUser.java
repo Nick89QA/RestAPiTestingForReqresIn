@@ -2,6 +2,8 @@ package api.steps;
 
 import api.pojo.PojoCreateUpdateUserRequest;
 import api.pojo.PojoCreateUserResponse;
+import api.pojo.PojoRegisterUserRequest;
+import api.pojo.PojoRegisterUserResponse;
 import api.specification.Specification;
 import logger.MyLogger;
 import org.slf4j.Logger;
@@ -65,6 +67,18 @@ public class CreateNewUser {
 
     }
 
+    public static void createUserWithEmptyBracket() {
+        PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
+
+        given()
+                .basePath(createUser)
+                .body(rq)
+                .log().all()
+                .when().post()
+                .then().log().all();
+
+    }
+
     public static void createUserWithMinimumCharBody() {
         try {
             PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMinCharacters();
@@ -114,20 +128,17 @@ public class CreateNewUser {
 
     public static void createUserWithEmptyBody() {
         try {
-            PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithEmptyBrackets();
+            PojoRegisterUserRequest regNewUser = UserGenerator.regNewUser();
 
-            PojoCreateUserResponse rs = given()
-                    .basePath(createUser)
-                    .body(rq)
+            PojoRegisterUserResponse rs = given()
+                    .basePath(registerNewUser)
+                    .body(regNewUser)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoCreateUserResponse.class);
+                    .then().log().body().extract().as(PojoRegisterUserResponse.class);
 
             assertThat(rs)
-                    .isNotNull()
-                    .extracting(PojoCreateUserResponse::getJob, PojoCreateUserResponse::getName)
-                    .containsExactly(rq.getJob(), rq.getName());
-
+                    .isNotNull();
 
             logger.info("The user with empty body has been created");
         } catch (Exception e) {

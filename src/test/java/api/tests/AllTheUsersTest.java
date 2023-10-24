@@ -72,6 +72,16 @@ public class AllTheUsersTest {
 
     }
 
+    @Test
+    public void createUserWithEmptyBrack() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.response201Created());
+        CreateNewUser.createUserWithEmptyBracket();
+
+    }
+
+
+
+
     /**
      * ---List of users---
      */
@@ -171,6 +181,12 @@ public class AllTheUsersTest {
     public void checkFieldColor() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         ListResource.checkFieldColor();
+    }
+
+    @Test
+    public void regNewUser() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+
     }
 
 
