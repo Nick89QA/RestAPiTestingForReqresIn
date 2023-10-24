@@ -13,6 +13,7 @@ public class Endpoints {
     public static final String createUser = "/api/users";
     public static final String createUserIncorrectPath = "/apiusers";
     public static final String updateUser = "/api/users/2";
+    public static final String registerNewUser = "/api/register";
 
 
 
