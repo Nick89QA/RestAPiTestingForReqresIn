@@ -47,14 +47,14 @@ public class UserGenerator {
 
     }
 
-    public static PojoRegisterUserResponse responseNewUser(){
+    public static PojoRegisterUserResponse responseRegisterUser(){
         return PojoRegisterUserResponse.builder()
                 .id(4)
                 .token("QpwL5tke4Pnpja7X4")
                 .build();
     }
 
-    public static PojoRegisterUserRequest regNewUser(){
+    public static PojoRegisterUserRequest registerUser(){
         return PojoRegisterUserRequest.builder()
                 .email("eve.holt@reqres.in")
                 .password("pistol")

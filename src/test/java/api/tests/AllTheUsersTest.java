@@ -2,10 +2,7 @@ package api.tests;
 
 import api.pojo.PojoListOfUsers;
 import api.specification.Specification;
-import api.steps.ListResource;
-import api.steps.CreateNewUser;
-import api.steps.SingleUser;
-import api.steps.UpdateUser;
+import api.steps.*;
 import logger.MyLogger;
 
 
@@ -186,6 +183,7 @@ public class AllTheUsersTest {
     @Test
     public void regNewUser() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
+        RegisterUser.RegisterUser();
 
     }
 

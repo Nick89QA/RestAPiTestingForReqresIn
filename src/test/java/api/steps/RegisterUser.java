@@ -1,13 +1,12 @@
 package api.steps;
 
-import api.pojo.PojoCreateUpdateUserRequest;
-import api.pojo.PojoCreateUserResponse;
-import api.specification.Specification;
+import api.pojo.*;
 import logger.MyLogger;
+import org.junit.Assert;
 import org.slf4j.Logger;
 import utils.UserGenerator;
 
-import static api.endpoints.Endpoints.createUser;
+import static api.endpoints.Endpoints.registerNewUser;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,24 +17,25 @@ public class RegisterUser {
 
     public static void RegisterUser() {
 
-
         try {
 
-            PojoCreateUpdateUserRequest rq = UserGenerator.createUserWithMaxCharacters();
+            PojoRegisterUserRequest requestUser = UserGenerator.registerUser();
+            PojoRegisterUserResponse responseUser = UserGenerator.responseRegisterUser();
 
-            PojoCreateUserResponse rs = given()
-                    .basePath(createUser)
-                    .body(rq)
+            PojoRegisterUserResponse response = given()
+                    .basePath(registerNewUser)
+                    .body(requestUser)
                     .log().all()
                     .when().post()
-                    .then().log().body().extract().as(PojoCreateUserResponse.class);
+                    .then().log().body().extract().as(PojoRegisterUserResponse.class);
+            Assert.assertEquals(response.getToken(), responseUser.getToken());
+            logger.info("We assert token from response, with token from userGenerator response");
 
-            assertThat(rs)
-                    .isNotNull()
-                    .extracting(PojoCreateUserResponse::getName, PojoCreateUserResponse::getJob)
-                    .containsExactly(rq.getName(), rq.getJob());
+            Assert.assertEquals(response.getId(), responseUser.getId());
+            logger.info("We assert id from response, with id from userGenerator response");
 
-            logger.info("The user with max characters body has been created");
+
+            logger.info("The user has been registered");
         } catch (Exception e) {
             logger.error(" the error has happened when user was created " + e.getMessage());
         }
