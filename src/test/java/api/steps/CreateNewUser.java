@@ -128,7 +128,7 @@ public class CreateNewUser {
 
     public static void createUserWithEmptyBody() {
         try {
-            PojoRegisterUserRequest regNewUser = UserGenerator.regNewUser();
+            PojoRegisterUserRequest regNewUser = UserGenerator.registerUser();
 
             PojoRegisterUserResponse rs = given()
                     .basePath(registerNewUser)

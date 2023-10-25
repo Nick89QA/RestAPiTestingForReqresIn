@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PojoRegisterUserResponse {
 
-
     private Integer id;
     private String token;
 }
