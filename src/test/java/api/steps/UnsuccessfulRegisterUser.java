@@ -11,15 +11,20 @@ public class UnsuccessfulRegisterUser {
 
 
     public static void UnsRegisterUser() {
+        try {
 
-                      given()
+            given()
                     .basePath(registerNewUser)
                     .body("sydney@fife")
                     .log().all()
                     .when().post()
                     .then().log().all();
-
-
+            logger.info(" Bad request 400 ");
+        } catch (Exception e) {
+            logger.error(" Some problem happened with request " + e.getMessage());
+        }
     }
 
 }
+
+
