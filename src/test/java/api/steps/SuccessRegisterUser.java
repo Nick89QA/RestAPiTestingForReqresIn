@@ -10,7 +10,7 @@ import static api.endpoints.Endpoints.registerNewUser;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class RegisterUser {
+public class SuccessRegisterUser {
 
     private static final Logger logger = MyLogger.getLogger();
 

@@ -52,7 +52,7 @@ public class Specification {
     public static final ResponseSpecification responseSpecBadRequest400() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
-                .expectContentType(ContentType.JSON)
+                .expectContentType(ContentType.HTML)
                 .build();
     }
 

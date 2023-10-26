@@ -19,7 +19,6 @@ public class AllTheUsersTest {
     private static final Logger logger = MyLogger.getLogger();
 
 
-
     /**
      * ---New User---
      */
@@ -77,8 +76,6 @@ public class AllTheUsersTest {
     }
 
 
-
-
     /**
      * ---List of users---
      */
@@ -118,8 +115,6 @@ public class AllTheUsersTest {
         api.steps.ListOfUsers.checkTheFieldAvatar();
 
     }
-
-
 
 
     /**
@@ -181,11 +176,17 @@ public class AllTheUsersTest {
     }
 
     @Test
-    public void regNewUser() {
+    public void SucRegUser() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
-        RegisterUser.RegisterUser();
+        SuccessRegisterUser.RegisterUser();
 
     }
 
+    @Test
+    public void UnsRegUser() {
+        Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecBadRequest400());
+        UnsuccessfulRegisterUser.UnsRegisterUser();
+
+    }
 
 }
