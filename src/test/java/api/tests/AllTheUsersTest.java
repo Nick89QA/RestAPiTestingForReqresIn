@@ -3,6 +3,8 @@ package api.tests;
 import api.pojo.PojoListOfUsers;
 import api.specification.Specification;
 import api.steps.*;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import logger.MyLogger;
 
 
@@ -80,7 +82,7 @@ public class AllTheUsersTest {
      * ---List of users---
      */
 
-    @Test //positive
+    @And("^We are getting a list of users using method GET$")
     public void getListOfUsersAndMatchEmailAndFirstName() {
         Specification.installSpecification(Specification.requestSpec(), Specification.responseSpecOK200());
         api.steps.ListOfUsers.getUsers();
