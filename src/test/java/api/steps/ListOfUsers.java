@@ -1,6 +1,7 @@
 package api.steps;
 
 import api.pojo.PojoListOfUsers;
+import io.cucumber.java.en.Given;
 import logger.MyLogger;
 import org.slf4j.Logger;
 
